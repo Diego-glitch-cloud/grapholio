@@ -70,7 +70,7 @@ export default function GraphViewer() {
     label.color = GROUP_PALETTE[node.group]?.color ?? '#ffffff'
     label.textHeight = node.group === 1 ? 3.5 : node.group === 2 ? 2.8 : 2.2
     label.position.y = radius + 4
-    label.fontFace = 'Inter, system-ui, sans-serif'
+    label.fontFace = 'Space Grotesk, system-ui, sans-serif'
     label.backgroundColor = 'rgba(10,15,36,0.55)'
     label.padding = 1.5
     label.borderRadius = 3
