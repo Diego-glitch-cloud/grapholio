@@ -1,3 +1,5 @@
+import { useState, useEffect, useRef } from 'react'
+
 const GROUP_COLORS = {
   1: '#60a5fa',
   2: '#818cf8',
@@ -53,6 +55,39 @@ function LinkButton({ href, label, icon }) {
 }
 
 export default function NodePanel({ node, pos, onClose }) {
+  const posRef = useRef({ x: pos.x, y: pos.y })
+  const [position, setPosition] = useState({ x: pos.x, y: pos.y })
+  const [dragging, setDragging] = useState(false)
+
+  useEffect(() => {
+    posRef.current = { x: pos.x, y: pos.y }
+    setPosition({ x: pos.x, y: pos.y })
+  }, [pos.x, pos.y])
+
+  const onMouseDown = (e) => {
+    if (e.button !== 0) return
+    e.preventDefault()
+    setDragging(true)
+    const startMouseX = e.clientX
+    const startMouseY = e.clientY
+    const startX = posRef.current.x
+    const startY = posRef.current.y
+
+    const onMove = (e) => {
+      const nx = startX + (e.clientX - startMouseX)
+      const ny = startY + (e.clientY - startMouseY)
+      posRef.current = { x: nx, y: ny }
+      setPosition({ x: nx, y: ny })
+    }
+    const onUp = () => {
+      setDragging(false)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+  }
+
   if (!node) return null
 
   const color = GROUP_COLORS[node.group] ?? '#60a5fa'
@@ -64,10 +99,11 @@ export default function NodePanel({ node, pos, onClose }) {
       className="holo-panel absolute z-50"
       style={{
         color,
-        left: pos.x,
-        top: pos.y,
+        left: position.x,
+        top: position.y,
         width: '400px',
         animation: 'holo-deploy 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        cursor: dragging ? 'grabbing' : 'default',
       }}
     >
       {/* Gradient border wrapper */}
@@ -97,8 +133,12 @@ export default function NodePanel({ node, pos, onClose }) {
           />
 
           <div className="px-10 py-9">
-            {/* Header */}
-            <div className="flex justify-between items-start mb-7">
+            {/* Header — drag handle */}
+            <div
+              className="flex justify-between items-start mb-7 select-none"
+              onMouseDown={onMouseDown}
+              style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+            >
               <div className="flex-1 pr-6">
                 <p
                   className="text-xs font-medium tracking-[0.22em] uppercase mb-2"
