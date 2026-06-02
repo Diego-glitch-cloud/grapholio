@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import SpriteText from 'three-spritetext'
 import graphData from '../data.json'
 import NodePanel from './NodePanel'
+import { createCosmicEye } from './CosmicEye'
 
 const GROUP_PALETTE = {
   1: { color: '#60a5fa' },
@@ -99,6 +100,8 @@ export default function GraphViewer() {
     if (!graphRef.current) return
     const scene = graphRef.current.scene()
 
+    const eye = createCosmicEye(scene)
+
     // Twinkling groups — 3 layers with offset phases
     const twinklers = Array.from({ length: 3 }, (_, i) => {
       const count = 180
@@ -162,6 +165,9 @@ export default function GraphViewer() {
     const animate = () => {
       const now = Date.now()
       lastT = now
+
+      // Cosmic eye
+      eye.update(now / 1000)
 
       // Halo rings
       haloRings.current.forEach((ring, i) => {
@@ -237,6 +243,7 @@ export default function GraphViewer() {
 
     return () => {
       cancelAnimationFrame(ambientRaf)
+      eye.dispose()
       twinklers.forEach(({ pts, geo, mat }) => { scene.remove(pts); geo.dispose(); mat.dispose() })
       shooters.forEach(({ strands }) => strands.forEach(({ line, geo, mat }) => { scene.remove(line); geo.dispose(); mat.dispose() }))
     }
