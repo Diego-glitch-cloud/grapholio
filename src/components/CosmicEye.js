@@ -15,10 +15,12 @@ export function createCosmicEye(scene, {
   count = 8000,
   scale = 28,
   rotate = true,
+  brightness = 1.0,
+  particleSize = 0.25,
 } = {}) {
   const S = scale
 
-  const geometry = new THREE.TetrahedronGeometry(0.25)
+  const geometry = new THREE.TetrahedronGeometry(particleSize)
   const material = new THREE.MeshBasicMaterial({
     color: 0xffffff,
     blending: THREE.AdditiveBlending,
@@ -123,7 +125,7 @@ export function createCosmicEye(scene, {
         (cx * sinA + cz * cosA) * rad,
       )
 
-      pColor.setHSL(hue, sat, light)
+      pColor.setHSL(hue, sat, Math.min(1.0, light * brightness))
       positions[i].lerp(target, 0.1)
       dummy.position.copy(positions[i])
       dummy.updateMatrix()
