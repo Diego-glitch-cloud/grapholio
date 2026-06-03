@@ -2,10 +2,11 @@
   "nodes": [
     {
       "id": "root",
-      "name": "Diego Andre Calderón Salazar",
+      "name": "Diego André Calderón Salazar",
       "group": 1,
       "val": 1000,
-      "desc": "Estudiante de Ingeniería en Ciencias de la Computación y Desarrollador Full-Stack. Universidad del Valle de Guatemala."
+      "image": "/foto-diego.jpeg",
+      "desc": "Desarrollador Full-Stack de 23 años, estudiante de Ingeniería en Ciencias de la Computación en la Universidad del Valle de Guatemala. Apasionado por las tecnologías con especial interés en ciencia de datos y desarrollo web. Fuera del código disfruto la música, el cine, los videojuegos y todo lo relacionado con el espacio."
     },
 
     {
@@ -45,10 +46,10 @@
       "desc": "Desarrollador activo desde los primeros años de carrera."
     },
 
-    { "id": "cat_languages",  "name": "Lenguajes",      "group": 4, "val": 13, "desc": "Lenguajes de programación con los que disfruto trabajar." },
-    { "id": "cat_frameworks", "name": "Frameworks",     "group": 4, "val": 13, "desc": "Frameworks y librerías con las que estoy familiarizado." },
-    { "id": "cat_databases",  "name": "Bases de Datos", "group": 4, "val": 13, "desc": "Motores de base de datos relacionales que" },
-    { "id": "cat_infra",      "name": "Infraestructura","group": 4, "val": 13, "desc": "Herramientas de despliegue, contenedores y CI/CD." },
+    { "id": "cat_languages",  "name": "Lenguajes",      "group": 7, "val": 13, "desc": "Lenguajes de programación con los que disfruto trabajar." },
+    { "id": "cat_frameworks", "name": "Frameworks",     "group": 7, "val": 13, "desc": "Frameworks y librerías con las que estoy familiarizado." },
+    { "id": "cat_databases",  "name": "Bases de Datos", "group": 7, "val": 13, "desc": "Motores de base de datos relacionales que domino." },
+    { "id": "cat_infra",      "name": "Infraestructura","group": 7, "val": 13, "desc": "Herramientas de despliegue, contenedores y CI/CD." },
 
     { "id": "tech_go",         "name": "Go",          "group": 4, "val": 7, "desc": "APIs REST de alto rendimiento y servicios backend eficientes." },
     { "id": "tech_ts",         "name": "TypeScript",  "group": 4, "val": 7, "desc": "Tipado estático sobre JavaScript para frontend y backend." },

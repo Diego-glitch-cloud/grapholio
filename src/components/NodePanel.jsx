@@ -7,6 +7,7 @@ const GROUP_COLORS = {
   4: '#fb923c',
   5: '#f472b6',
   6: '#a78bfa',
+  7: '#22d3ee',
 }
 
 function TechChip({ label, color }) {
@@ -78,7 +79,7 @@ function SectionLabel({ children }) {
   )
 }
 
-export default function NodePanel({ node, pos, onClose }) {
+export default function NodePanel({ node, pos, onClose, isClosing = false }) {
   const posRef = useRef({ x: pos.x, y: pos.y })
   const [position, setPosition] = useState({ x: pos.x, y: pos.y })
   const [dragging, setDragging] = useState(false)
@@ -147,7 +148,10 @@ export default function NodePanel({ node, pos, onClose }) {
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        animation: 'holo-deploy 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 6s 0.6s infinite',
+        animation: isClosing ? 'none' : 'holo-deploy 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 6s 0.6s infinite',
+        opacity: isClosing ? 0 : undefined,
+        transform: isClosing ? 'translateY(-10px) scale(0.96)' : undefined,
+        transition: isClosing ? 'opacity 0.4s ease, transform 0.4s ease' : undefined,
         cursor: dragging ? 'grabbing' : 'default',
       }}
     >
@@ -219,9 +223,11 @@ export default function NodePanel({ node, pos, onClose }) {
                     </span>
                   )}
                 </div>
-                <h2 className="text-3xl font-semibold leading-tight text-slate-100">
-                  {node.name}
-                </h2>
+                {node.group !== 1 && (
+                  <h2 className="text-3xl font-semibold leading-tight text-slate-100">
+                    {node.name}
+                  </h2>
+                )}
               </div>
               <button
                 onClick={onClose}
@@ -243,7 +249,29 @@ export default function NodePanel({ node, pos, onClose }) {
             className="relative z-10 px-10 pb-9 overflow-y-auto flex-1 min-h-0"
             style={{ scrollbarWidth: 'thin', scrollbarColor: `${color}40 transparent` }}
           >
-            {/* Image */}
+            {/* Portrait + name row — root node */}
+            {node.group === 1 && node.image && (
+              <div className="flex items-center gap-6 mb-7">
+                <div
+                  className="shrink-0 w-28 h-28 rounded-full overflow-hidden"
+                  style={{
+                    border: `3px solid ${color}55`,
+                    boxShadow: `0 0 28px ${color}40`,
+                  }}
+                >
+                  <img src={node.image} alt={node.name} className="w-full h-full object-cover object-top" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-2xl font-semibold text-slate-100 leading-tight mb-1">
+                    {node.name}
+                  </p>
+                  <p className="text-sm text-slate-400">23 años</p>
+                  <p className="text-sm mt-1" style={{ color, opacity: 0.7 }}>Desarrollador Full-Stack</p>
+                </div>
+              </div>
+            )}
+
+            {/* Screenshot — projects */}
             {isProject && node.image && (
               <div className="mb-7 rounded-lg overflow-hidden" style={{ border: `1px solid ${color}30`, background: 'rgba(0,0,0,0.3)' }}>
                 <img src={node.image} alt={node.name} className="w-full object-contain" style={{ maxHeight: '280px' }} />

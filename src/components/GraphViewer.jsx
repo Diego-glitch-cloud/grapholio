@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import SpriteText from 'three-spritetext'
 import graphData from '../data.json'
 import NodePanel from './NodePanel'
+import WelcomeCard from './WelcomeCard'
 import { createBlackHole } from './BlackHole'
 import { createBlackHoleTON618 } from './BlackHoleTON618'
 import { createNeutronStar } from './NeutronStar'
@@ -15,6 +16,7 @@ const GROUP_PALETTE = {
   4: { color: '#fb923c' },
   5: { color: '#f472b6' },
   6: { color: '#a78bfa' },
+  7: { color: '#22d3ee' },
 }
 
 const NODE_ID_MAP = Object.fromEntries(graphData.nodes.map((n) => [n.id, n]))
@@ -28,6 +30,26 @@ export default function GraphViewer() {
   const highlightNodesRef = useRef(new Set())
   const selectedNodeIdRef = useRef(null)
   const [selectedNode, setSelectedNode] = useState(null)
+  const [closingPanel, setClosingPanel] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+
+  const closePanel = useCallback(() => {
+    if (closingPanel) return
+    setClosingPanel(true)
+    setTimeout(() => {
+      selectedNodeIdRef.current = null
+      setSelectedNode(prev => {
+        const mesh = nodeMeshes.current.get(prev?.id)
+        if (mesh) {
+          mesh.rotation.set(0, 0, 0)
+          const palette = GROUP_PALETTE[NODE_ID_MAP[prev?.id]?.group] ?? GROUP_PALETTE[1]
+          mesh.material.color.set(palette.color)
+        }
+        return null
+      })
+      setClosingPanel(false)
+    }, 420)
+  }, [closingPanel])
   const [panelPos, setPanelPos] = useState({ x: 0, y: 0 })
   const [dimensions, setDimensions] = useState({
     width: window.innerWidth,
@@ -44,7 +66,7 @@ export default function GraphViewer() {
         return 45
       })
 
-      graphRef.current.cameraPosition({ x: 60, y: 80, z: 400 }, { x: 0, y: 0, z: 0 })
+      graphRef.current.cameraPosition({ x: 0, y: 0, z: 370 })
 
       // Star field — two layers for depth
       const scene = graphRef.current.scene()
@@ -234,23 +256,28 @@ export default function GraphViewer() {
 
     let lastT = Date.now()
     let ambientRaf
+    let frameCount = 0
 
     const animate = () => {
       const now = Date.now()
       lastT = now
+      frameCount++
 
-      // Cosmic entities
-      bh1.update(now / 1000)
-      bh2.update(now / 1000)
-      ton618_a.update(now / 1000)
-      ton618_b.update(now / 1000)
-      ton618_c.update(now / 1000)
-      ton618_d.update(now / 1000)
-      ton618_e.update(now / 1000)
-      ton618_f.update(now / 1000)
-      ns1.update(now / 1000)
-      ns2.update(now / 1000)
-      ns3.update(now / 1000)
+      // Cosmic entities — throttled to 30fps (every 2nd frame) to keep CPU load manageable
+      if (frameCount % 2 === 0) {
+        const t = now / 1000
+        bh1.update(t)
+        bh2.update(t)
+        ton618_a.update(t)
+        ton618_b.update(t)
+        ton618_c.update(t)
+        ton618_d.update(t)
+        ton618_e.update(t)
+        ton618_f.update(t)
+        ns1.update(t)
+        ns2.update(t)
+        ns3.update(t)
+      }
 
       // Halo rings
       haloRings.current.forEach((ring, i) => {
@@ -460,6 +487,7 @@ export default function GraphViewer() {
 
   return (
     <div className="w-full h-screen relative overflow-hidden">
+      {showWelcome && <WelcomeCard onDismiss={() => setShowWelcome(false)} />}
       <ForceGraph3D
         ref={graphRef}
         graphData={graphData}
@@ -481,6 +509,7 @@ export default function GraphViewer() {
         controlType="orbit"
         enableNodeDrag={false}
         showNavInfo={false}
+        onBackgroundClick={() => { if (selectedNode) closePanel() }}
         onNodeHover={updateHighlight}
         onNodeClick={(node) => {
           selectedNodeIdRef.current = node.id
@@ -501,16 +530,7 @@ export default function GraphViewer() {
           setPanelPos({ x, y })
         }}
       />
-      <NodePanel key={selectedNode?.id} node={selectedNode} pos={panelPos} onClose={() => {
-        selectedNodeIdRef.current = null
-        const mesh = nodeMeshes.current.get(selectedNode?.id)
-        if (mesh) {
-          mesh.rotation.set(0, 0, 0)
-          const palette = GROUP_PALETTE[NODE_ID_MAP[selectedNode?.id]?.group] ?? GROUP_PALETTE[1]
-          mesh.material.color.set(palette.color)
-        }
-        setSelectedNode(null)
-      }} />
+      <NodePanel key={selectedNode?.id} node={selectedNode} pos={panelPos} isClosing={closingPanel} onClose={closePanel} />
     </div>
   )
 }
