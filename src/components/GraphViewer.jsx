@@ -100,7 +100,10 @@ export default function GraphViewer() {
       graphRef.current.d3Force('link').distance((link) => {
         const src = typeof link.source === 'object' ? link.source.id : link.source
         const tgt = typeof link.target === 'object' ? link.target.id : link.target
-        if (src === 'branch_tech' || src?.startsWith('cat_')) return 10
+        if (src === 'branch_tech' || src?.startsWith('cat_')) return 6
+        if (tgt === 'branch_tech') return 10
+        if (src === 'root') return 22
+        if (src?.startsWith('branch_')) return 28
         return 45
       })
 
@@ -134,7 +137,7 @@ export default function GraphViewer() {
       controls.rotateSpeed = 0.6
       controls.zoomSpeed = 1.6
       controls.panSpeed = 1.2
-      controls.minDistance = 5
+      controls.minDistance = 0.5
       controls.maxDistance = 3000
       controls.screenSpacePanning = true
     }
