@@ -5,7 +5,7 @@
       "name": "Diego André Calderón Salazar",
       "group": 1,
       "val": 1000,
-      "image": "public/foto-diego.jpeg",
+      "image": "foto-diego.jpeg",
       "desc": "Desarrollador Full-Stack de 23 años, estudiante de Ingeniería en Ciencias de la Computación en la Universidad del Valle de Guatemala. Apasionado por las tecnologías con especial interés en ciencia de datos y desarrollo web. Fuera del código disfruto la música, el cine, los videojuegos y todo lo relacionado con el espacio."
     },
 
@@ -128,7 +128,7 @@
       "tech": ["TypeScript", "React 18", "Express 4", "MariaDB", "Docker", "JWT", "Axios", "GitHub Actions"],
       "github": "https://github.com/hmndzzl/Software_Proyecto.git",
       "demo": "http://158.23.60.1/",
-      "image": "/projects/software-proyecto.png"
+      "image": "projects/software-proyecto.png"
     },
     {
       "id": "proj_qash",
@@ -157,7 +157,7 @@
         { "label": "Frontend (GitHub)", "url": "https://github.com/hackathon-cursor/hackaton-frontend.git" },
         { "label": "Backend (GitHub)", "url": "https://github.com/hackathon-cursor/hackathon-backend.git" }
       ],
-      "image": "/projects/qash.png"
+      "image": "projects/qash.png"
     },
     {
       "id": "proj_calculator",
@@ -180,7 +180,7 @@
       "tech": ["React 19", "TypeScript", "Vitest", "Storybook", "Bun", "Vite", "Vercel"],
       "github": "https://github.com/Diego-glitch-cloud/lab7-calculator",
       "demo": "https://calculator-7i9t7n7tf-salco-s-projects.vercel.app",
-      "image": "/projects/calculator.png"
+      "image": "projects/calculator.png"
     },
     {
       "id": "proj_snake",
@@ -203,7 +203,7 @@
       "tech": ["React 19", "JavaScript", "Vite", "CSS", "localStorage", "Vercel"],
       "github": "https://github.com/Diego-glitch-cloud/lab6-snake",
       "demo": "https://snake-game-en4wnqbdt-salco-s-projects.vercel.app/",
-      "image": "/projects/snake.png"
+      "image": "projects/snake.png"
     },
     {
       "id": "proj_lab_viz",
@@ -225,7 +225,7 @@
       "tech": ["PostgreSQL 15", "Metabase", "Docker Compose", "SQL"],
       "github": "https://github.com/Pxdro-410/Lab-visualizaciones-DB.git",
       "demo": null,
-      "image": "/projects/lab-visualizaciones.png"
+      "image": "projects/lab-visualizaciones.png"
     },
     {
       "id": "proj_py2micro",
@@ -251,7 +251,7 @@
       "tech": ["C++ (Arduino)", "CUDA C++", "ESP8266", "Python", "NVIDIA Thrust", "Blynk", "Google Sheets", "Proteus"],
       "github": "https://github.com/Diego-glitch-cloud/PY2-MICRO",
       "demo": null,
-      "image": "/projects/py2-micro.png"
+      "image": "projects/py2-micro.png"
     },
     {
       "id": "proj_proyecto2_db",
@@ -277,7 +277,7 @@
       "tech": ["Vue 3", "Fastify", "MariaDB", "Prisma", "Docker", "JWT", "Chart.js", "GitHub Actions"],
       "github": "https://github.com/Diego-glitch-cloud/Proyecto2-DB",
       "demo": "http://35.255.29.219:8081/",
-      "image": "/projects/proyecto2-db.png"
+      "image": "projects/proyecto2-db.png"
     }
   ],
   "links": [
