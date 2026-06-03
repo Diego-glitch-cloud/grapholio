@@ -356,6 +356,21 @@ export default function GraphViewer() {
     label.borderRadius = 3
     mesh.add(label)
 
+    if (node.featured) {
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(radius * 1.9, radius * 2.2, 64),
+        new THREE.MeshBasicMaterial({
+          color: palette.color,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.5,
+        })
+      )
+      ring.rotation.x = Math.PI * 0.3
+      mesh.add(ring)
+      haloRings.current.push(ring)
+    }
+
     if (node.id === 'root') {
       // Outer ring
       const ring1 = new THREE.Mesh(

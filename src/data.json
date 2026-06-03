@@ -71,7 +71,8 @@
       "id": "proj_software",
       "name": "Gestión Parroquial",
       "group": 5,
-      "val": 16,
+      "val": 20,
+      "featured": true,
       "status": "En Desarrollo",
       "desc": "Plataforma administrativa para la Parroquia San Pedro Nolasco (UVG 2026). Gestiona tareas litúrgicas, reservas de espacios con validación de conflictos, eventos, grupos parroquiales y notificaciones segmentadas. Metodología Scrum con deploy real en Azure VM.",
       "highlights": [
@@ -97,7 +98,8 @@
       "id": "proj_qash",
       "name": "QASH — Billetera Digital",
       "group": 5,
-      "val": 16,
+      "val": 20,
+      "featured": true,
       "status": "Completado",
       "desc": "Plataforma fintech de inclusión financiera para el mercado informal de Guatemala, construida en hackathon. Vendedores cobran con QR, compradores pagan desde su wallet, admin supervisa métricas. Pago de saldo con Stripe. Tres roles: seller, buyer, admin.",
       "highlights": [
@@ -122,32 +124,11 @@
       "image": "/projects/qash.png"
     },
     {
-      "id": "proj_music",
-      "name": "E-Commerce Musical",
-      "group": 5,
-      "val": 14,
-      "desc": "Tienda de álbumes en línea con búsqueda en tiempo real, carrito de compras y reproducción de previews.",
-      "tech": ["Vue", "Fastify", "iTunes API", "Node.js"],
-      "github": null,
-      "demo": null,
-      "image": null
-    },
-    {
-      "id": "proj_narrative",
-      "name": "Plataforma HTML Narrativa",
-      "group": 5,
-      "val": 14,
-      "desc": "Estructura web narrativa adaptable basada en conceptos psicológicos y piezas musicales conceptuales.",
-      "tech": ["HTML", "CSS", "JavaScript"],
-      "github": null,
-      "demo": null,
-      "image": null
-    },
-    {
       "id": "proj_proyecto2_db",
       "name": "Tienda de Discos",
       "group": 5,
-      "val": 16,
+      "val": 20,
+      "featured": true,
       "desc": "Tienda de vinilos, CDs y cassettes con panel admin multirol. Venta online y venta presencial desde el panel de staff, con KPIs en tiempo real y exportación CSV.",
       "highlights": [
         "RBAC dual: middleware JWT + 5 usuarios MariaDB con GRANTs por columna — el acceso no-autorizado falla incluso a nivel de driver",
@@ -184,8 +165,6 @@
     { "source": "branch_projects", "target": "proj_software" },
 
     { "source": "branch_projects", "target": "proj_qash" },
-    { "source": "branch_projects", "target": "proj_music" },
-    { "source": "branch_projects", "target": "proj_narrative" },
     { "source": "branch_projects", "target": "proj_proyecto2_db" }
   ]
 }
