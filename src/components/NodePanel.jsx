@@ -83,6 +83,13 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
   const posRef = useRef({ x: pos.x, y: pos.y })
   const [position, setPosition] = useState({ x: pos.x, y: pos.y })
   const [dragging, setDragging] = useState(false)
+  const [visualClosing, setVisualClosing] = useState(false)
+
+  useEffect(() => {
+    if (isClosing) {
+      requestAnimationFrame(() => setVisualClosing(true))
+    }
+  }, [isClosing])
 
   useEffect(() => {
     posRef.current = { x: pos.x, y: pos.y }
@@ -138,6 +145,7 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
 
   return (
     <div
+      data-nodepanel
       className="holo-panel holo-scan absolute z-50"
       style={{
         color,
@@ -149,9 +157,9 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
         flexDirection: 'column',
         overflow: 'hidden',
         animation: isClosing ? 'none' : 'holo-deploy 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 6s 0.6s infinite',
-        opacity: isClosing ? 0 : undefined,
-        transform: isClosing ? 'translateY(-10px) scale(0.96)' : undefined,
-        transition: isClosing ? 'opacity 0.4s ease, transform 0.4s ease' : undefined,
+        opacity: visualClosing ? 0 : 1,
+        transform: visualClosing ? 'translateY(-10px) scale(0.96)' : 'none',
+        transition: 'opacity 0.4s ease, transform 0.4s ease',
         cursor: dragging ? 'grabbing' : 'default',
       }}
     >

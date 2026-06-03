@@ -486,7 +486,13 @@ export default function GraphViewer() {
   )
 
   return (
-    <div className="w-full h-screen relative overflow-hidden">
+    <div
+      className="w-full h-screen relative overflow-hidden"
+      onMouseDown={(e) => {
+        if (!selectedNode || closingPanel) return
+        if (!e.target.closest('[data-nodepanel]')) closePanel()
+      }}
+    >
       {showWelcome && <WelcomeCard onDismiss={() => setShowWelcome(false)} />}
       <ForceGraph3D
         ref={graphRef}
@@ -509,7 +515,6 @@ export default function GraphViewer() {
         controlType="orbit"
         enableNodeDrag={false}
         showNavInfo={false}
-        onBackgroundClick={() => { if (selectedNode) closePanel() }}
         onNodeHover={updateHighlight}
         onNodeClick={(node) => {
           selectedNodeIdRef.current = node.id
