@@ -140,6 +140,7 @@ export default function NodePanel({ node, pos, onClose }) {
         maxHeight: '88vh',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
         animation: 'holo-deploy 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 6s 0.6s infinite',
         cursor: dragging ? 'grabbing' : 'default',
       }}
@@ -192,12 +193,26 @@ export default function NodePanel({ node, pos, onClose }) {
           >
             <div className="flex justify-between items-start">
               <div className="flex-1 pr-6">
-                <p
-                  className="text-base font-medium tracking-[0.22em] uppercase mb-2"
-                  style={{ color, opacity: 0.6 }}
-                >
-                  {groupLabel}
-                </p>
+                <div className="flex items-center gap-3 mb-2">
+                  <p
+                    className="text-base font-medium tracking-[0.22em] uppercase"
+                    style={{ color, opacity: 0.6 }}
+                  >
+                    {groupLabel}
+                  </p>
+                  {node.status && (
+                    <span
+                      className="text-xs px-2 py-0.5 rounded-full font-medium tracking-wide"
+                      style={{
+                        color: node.status === 'En Desarrollo' ? '#fbbf24' : '#34d399',
+                        background: node.status === 'En Desarrollo' ? '#fbbf2418' : '#34d39918',
+                        border: `1px solid ${node.status === 'En Desarrollo' ? '#fbbf2450' : '#34d39950'}`,
+                      }}
+                    >
+                      {node.status}
+                    </span>
+                  )}
+                </div>
                 <h2 className="text-3xl font-semibold leading-tight text-slate-100">
                   {node.name}
                 </h2>

@@ -67,7 +67,7 @@ export default function GraphViewer() {
       controls.enableDamping = true
       controls.dampingFactor = 0.08
       controls.rotateSpeed = 0.6
-      controls.zoomSpeed = 0.8
+      controls.zoomSpeed = 1.6
       controls.panSpeed = 0.8
     }
   }, [])
