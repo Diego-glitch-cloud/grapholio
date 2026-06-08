@@ -389,6 +389,7 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
           </div>
         </div>
       </div>
+      <EmailComposeCard open={emailOpen} onClose={() => setEmailOpen(false)} color={color} />
     </div>
   )
 }

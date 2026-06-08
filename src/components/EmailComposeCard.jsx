@@ -92,6 +92,7 @@ export default function EmailComposeCard({ open, onClose, color = '#60a5fa' }) {
 
   return createPortal(
     <div
+      data-nodepanel
       className="fixed inset-0 z-[100] flex items-center justify-center"
       style={{
         background: 'rgba(5,12,31,0.6)',
