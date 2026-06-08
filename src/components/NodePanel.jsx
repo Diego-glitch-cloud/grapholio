@@ -366,7 +366,7 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
             {node.id === 'info_spotify' && (
               <div className="mb-5">
                 <div className="mb-4 h-px" style={{ background: 'rgba(148,163,184,0.08)' }} />
-                <RandomAlbumCard color={color} profileUrl={node.links?.find((l) => l.profile)?.profile} />
+                <RandomAlbumCard color={color} profileUrl={node.profile} />
               </div>
             )}
 
