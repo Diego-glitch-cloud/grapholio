@@ -67,10 +67,20 @@
       "desc": "Disponible para oportunidades profesionales — internships, proyectos freelance y posiciones junior en desarrollo web full-stack o ciencia de datos. Comprometido con aprender rápido y aportar desde el primer día."
     },
     {
+      "id": "info_spotify",
+      "name": "Spotify",
+      "group": 3,
+      "val": 15,
+      "icon": "https://cdn.simpleicons.org/spotify",
+      "desc": "Mi perfil de Spotify",
+      "profile": "https://open.spotify.com/user/dcalderon918?si=3b25726a3cd348db"
+    },
+    {
       "id": "info_contact",
       "name": "Contacto",
       "group": 3,
-      "val": 12,
+      "val": 32,
+      "featured": true,
       "desc": "¿Tienes un proyecto o una oportunidad en mente? Escríbeme directamente o revisa mi trabajo en GitHub.",
       "links": [
         { "label": "Enviar email", "url": "mailto:dcalderon918@gmail.com" },
@@ -291,6 +301,7 @@
     { "source": "branch_profile", "target": "info_merit" },
     { "source": "branch_profile", "target": "info_open" },
     { "source": "branch_profile", "target": "info_contact" },
+    { "source": "branch_profile", "target": "info_spotify" },
 
     { "source": "branch_tech", "target": "cat_languages" },
     { "source": "branch_tech", "target": "cat_frameworks" },
