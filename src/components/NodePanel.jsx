@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import EmailComposeCard from './EmailComposeCard'
 import LinkPreviewCard from './LinkPreviewCard'
 import RandomAlbumCard from './RandomAlbumCard'
+import ImageLightbox from './ImageLightbox'
 
 function spotifyEmbedUrl(url) {
   if (!url) return null
@@ -101,6 +102,7 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
   const [visualClosing, setVisualClosing] = useState(false)
   const [emailOpen, setEmailOpen] = useState(false)
   const [preview, setPreview] = useState(null)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   useEffect(() => {
     if (isClosing) {
@@ -312,9 +314,14 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
 
             {/* Screenshot — projects */}
             {isProject && node.image && (
-              <div className="mb-7 rounded-lg overflow-hidden" style={{ border: `1px solid ${color}30`, background: 'rgba(0,0,0,0.3)' }}>
+              <button
+                type="button"
+                onClick={() => setLightboxOpen(true)}
+                className="mb-7 w-full rounded-lg overflow-hidden cursor-zoom-in transition-opacity duration-200 hover:opacity-80"
+                style={{ border: `1px solid ${color}30`, background: 'rgba(0,0,0,0.3)' }}
+              >
                 <img src={node.image} alt={node.name} className="w-full object-contain" style={{ maxHeight: '280px' }} />
-              </div>
+              </button>
             )}
             {isProject && !node.image && (
               <div
@@ -425,6 +432,15 @@ export default function NodePanel({ node, pos, onClose, isClosing = false }) {
           </div>
         </div>
       </div>
+      {isProject && node.image && (
+        <ImageLightbox
+          open={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          color={color}
+          src={node.image}
+          alt={node.name}
+        />
+      )}
       <EmailComposeCard open={emailOpen} onClose={() => setEmailOpen(false)} color={color} />
       <LinkPreviewCard
         open={!!preview}
